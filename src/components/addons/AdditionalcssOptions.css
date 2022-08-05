@@ -1,0 +1,75 @@
+
+
+
+.addcss-container {
+    padding: 5px;
+    background-color: rgb(241, 238, 245);
+    border-radius: 10px;
+    /* p-1 bg-gradient-to-r from-slate-800 to-slate-700 */
+}
+
+.addcss-header {
+    padding: 1em;
+    margin: 1px;
+    border-radius: 10px;
+    background-color: rgb(115, 148, 238);
+    /* p-1 text-2xl text-white  bg-gradient-to-r from-red-600 to-slate-900 text-white rounded-lg */
+
+}
+
+.addcss-item-container {
+    /* border-dotted border-y rounded-sm  border-sky-700 flex  mw-auto  p-1 justify-between bg-slate-400 */
+    border-bottom: darkblue dashed;
+    border-radius: 10px;
+    display: flex;
+    padding: 1px;
+    border-radius: 5px;
+    justify-content: space-between;
+    background-color: rgb(244, 253, 251);
+
+}
+
+.addcss-option-heading {
+    /* text-black font-medium  ml-2 */
+    margin-left: 1rem;
+
+}
+
+.addcss-line {
+
+    max-width: 30pc;
+}
+
+.addcss.line-style {
+
+    /* w-full flex-grow-0 mt-3 border-t border-blue-900 justify-center h-1 */
+    display: flex;
+    flex-grow: 0;
+    margin-top: 1rem;
+    border: 1px solid black;
+    justify-content: center;
+
+}
+
+.addcss-price-box-container {
+    display: flex;
+
+    margin-right: 1em;
+
+    background-color: rgb(155, 149, 149);
+    border-radius: 5px;
+    /* flex gap-2 */
+}
+
+.addcss-price-box-container p {
+    margin: 1em;
+}
+
+.addcss-note {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: red;
+    font-size: larger;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}

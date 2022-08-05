@@ -1,0 +1,64 @@
+
+.page-container{
+    border: 1px solid black;
+    padding: 5px;
+    margin: 1px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 5px;
+    background-color: rgb(232, 238, 241);
+}
+.page-tile{
+    /* border: 1px solid black; */
+    padding: 5px;
+    min-width: 15pc;
+    margin: 1px;
+  
+}
+.page-description{
+
+ /* border: 1px solid black; */
+    padding: 5px;
+    min-width: 50pc;
+    margin: 1px;
+}
+.page-price-eta-container{
+
+ /* border: 1px solid black; */
+    padding: 5px;
+    min-width: 15pc;
+    margin: 1px;
+}
+.page-add-del-container{
+
+ /* border: 1px solid black; */
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-width: 15pc;
+    margin: 1rem;
+    /* background-color: chocolate; */
+}
+.page-add-del-container input{
+    margin: 2rem, ;
+    padding: 6px;
+    border: 1px solid rgb(180, 20, 20);
+    padding: 10px;
+    max-width: 15px;
+    border-radius: 5px;
+    
+}
+.page-add-del-container button{
+    padding: 5px;
+    margin-left: 2em blue;
+    border-radius: 10px;
+    background-color: rgb(238, 194, 238);
+    cursor: pointer;
+}
+
+.page-add-del-containe button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }

@@ -1,0 +1,45 @@
+.pageselectheader{
+    display: flex;
+}
+.pageselecttile{
+    display: flex;
+    padding: 1px;
+    background-color: beige;
+    border:1px red;
+}
+.pageselectexamples{
+    display: flex;
+}
+
+.pageselectpriceoption{
+    display: flex;
+}
+
+.pageselectquantityheader{
+    display: flex;
+}
+.pageselectexamples{
+    display: flex;
+    flex-direction: column;
+}
+.pageselectpriceoptiondollar{
+    display: flex;
+    flex-direction: column;
+}
+
+.pageselectpriceoptionETA{
+    display: flex;
+    flex-direction: column;
+}
+.responsivenessheader{
+    display:flex;
+    flex-direction: column;
+}
+
+.page-container{
+    border: 1px solid black;
+    padding: 5px;
+    margin: 1px;
+    border-radius: 5px;
+    background-color: rgb(144, 203, 238);
+}

@@ -1,0 +1,50 @@
+.pagelist-container{
+    /* p-2 border-2 w-full rounded-lg flex justify-between bg-slate-500; */
+padding: 2px;
+border: 1em;
+width:auto;
+border-radius: 1pc;
+display: flex;
+
+background-color: black;
+
+
+}
+.page-wrapper{
+
+    display: flex;
+    width: auto;
+    justify-content: space-around;
+
+}
+.page-heading{
+    /* p-2 m-1 text-white justify-center rounded-md bg-slate-600 */
+    padding: 2em;
+    margin:1px;
+    color: white;
+    justify-items: center;
+    border-radius: 5px;
+    background-color: rgb(111, 114, 117);
+
+}
+.heading-desc
+{
+    /* p-2 m-1 rounded-md text-white bg-slate-600 */
+    padding: 2px;
+    margin: 1px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(57, 58, 59);
+}
+.add-container{
+    padding: 2px;
+    background-color: azure;
+    display: flex;
+    
+}
+.pagelist-container button{
+    padding: 5px;
+    border: 4px;
+    margin: 5px;
+    border-radius: 5pc;
+}
