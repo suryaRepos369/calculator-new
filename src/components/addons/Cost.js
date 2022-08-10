@@ -62,42 +62,7 @@ const Cost = () => {
     <div className="all-component-container">
       <div className="menu-container">
         <h3 className="menu-header">Menu</h3>
-        <div>
-          <ButtonGroup className="button-group">
-            <Button
-              className="m-1 rounded-md  bg-gradient-to-r text-white from-red-600 to-slate-900 hover:bg-red-500 active:bg-purple-500"
-              variant="contained"
-              color="inherit"
-              onClick={cssHandler}
-            >
-              Advanced CSS settings
-            </Button>
-            <Button
-              className="m-1  m-1 rounded-md  bg-gradient-to-r text-white from-red-500 to-slate-700 rounded-md"
-              variant="contained"
-              color="inherit"
-              onClick={jsHandler}
-            >
-              Additional JS settings
-            </Button>
-            <Button
-              className=" m-1 rounded-md  bg-gradient-to-r text-white from-red-500 to-slate-700 m-1 rounded-md"
-              variant="contained"
-              color="inherit"
-              onClick={intHandler}
-            >
-              Interactivity Options
-            </Button>
-            <Button
-              className="m-1  m-1 rounded-md  bg-gradient-to-r text-white from-red-500 to-slate-700rounded-md"
-              variant="contained"
-              color="inherit"
-              onClick={compHandler}
-            >
-              Compatibility Options
-            </Button>
-          </ButtonGroup>
-        </div>
+       
       </div>
       <div className="component-container">
         <div>

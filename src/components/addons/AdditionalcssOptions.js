@@ -44,10 +44,14 @@ const AdditionalcssOptions = () => {
     }
   };
 
+  const css = React.useRef();
+  React.useEffect(() => {
+    css.current.focus();
+  }, []);
   return (
     <React.Fragment>
       <div className="addcss-container">
-        <h3 className="addcss-header">Advanced CSS options</h3>
+        <h5 className="addcss-header">Advanced CSS options</h5>
         <div className="addcss-note">
           <span>
             *** Note: we provide additional js functionality 3500 rupees per
@@ -66,9 +70,10 @@ const AdditionalcssOptions = () => {
                 <input
                   type="checkbox"
                   value={data.id}
+                  ref={css}
                   onChange={changeHandler}
                 ></input>
-                <p>{data.cost} /Hr </p>
+                <p>{data.cost + "/Hr"} </p>
               </div>
             </div>
           );

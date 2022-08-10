@@ -31,10 +31,6 @@
     display: flex;
     flex-direction: column;
 }
-.responsivenessheader{
-    display:flex;
-    flex-direction: column;
-}
 
 .page-container{
     border: 1px solid black;

@@ -51,14 +51,30 @@ const formdata = createSlice({
         qty: 0,
       },
     ],
+    response: [],
+    optimize: [],
+    framework: [],
+    layoutfont: [],
+    layout: [{ option: "retina" }],
     advcss: [],
     addjs: [],
     intopt: [],
     compopt: [],
     proj: [],
+    brief: "",
+    filedata: [],
+    contact: [],
+    contactFlag: false,
   },
   reducers: {
-    putpagesizeqty(state, action) {},
+    setcontactFlag(state, action) {
+      state.contactFlag = !state.contactFlag;
+    },
+
+    putcontactdata(state, action) {
+      state.contact = [];
+      state.contact.push(action.payload);
+    },
 
     incrementPagedata(state, action) {
       // state.pagesize.push(action.payload);
@@ -97,7 +113,59 @@ const formdata = createSlice({
         console.log("state.TotalCost:", state.TotalCost);
       }
     },
-
+    putresponsedata(state, action) {
+      state.response = [];
+      state.response.push({
+        id: action.payload.id,
+        qty: 1,
+        option: action.payload.option,
+        pc: action.payload.cost,
+        cost: (action.payload.cost / 100) * state.TotalCost,
+      });
+    },
+    putlayoutfontdata(state, action) {
+      state.layout.push({
+        id: action.payload.id,
+        qty: 1,
+        option: action.payload.option,
+      });
+    },
+    putlayoutretinadata(state, action) {
+      state.layoutfont = [];
+      state.layoutfont.push({
+        id: action.payload.id,
+        qty: 1,
+        option: action.payload.option,
+      });
+    },
+    putframedata(state, action) {
+      state.framework.push({
+        id: action.payload.id,
+        qty: 1,
+        option: action.payload.option,
+        pc: action.payload.pc,
+        cost: (action.payload.pc / 100) * state.TotalCost,
+      });
+    },
+    deleteframedata(state, action) {
+      state.framework = state.framework.filter(
+        (data) => data.id !== action.payload.id
+      );
+    },
+    putoptimizedata(state, action) {
+      state.response.push({
+        id: action.payload.id,
+        qty: 1,
+        option: action.payload.option,
+        pc: action.payload.pc,
+        cost: action.payload.pc * state.TotalCost,
+      });
+    },
+    deleteoptimizedata(state, action) {
+      state.response = state.response.filter(
+        (data) => data.id !== action.payload.id
+      );
+    },
     putadvcssdata(state, action) {
       state.advcss.push({
         id: action.payload.id,
@@ -111,6 +179,7 @@ const formdata = createSlice({
         (data) => data.id !== action.payload.id
       );
     },
+
     putaddjsdata(state, action) {
       state.addjs.push({
         id: action.payload.id,
@@ -127,7 +196,7 @@ const formdata = createSlice({
         id: action.payload.id,
         qty: 1,
         option: action.payload.option,
-        pc: action.payload.cost,
+        pc: action.payload.pc,
       });
     },
     deleteintoptdata(state, action) {
@@ -137,11 +206,12 @@ const formdata = createSlice({
       state.TotalCost -= (action.payload.cost / 100) * state.TotalCost;
     },
     putcompoptdata(state, action) {
+      state.compopt = [];
       state.compopt.push({
         id: action.payload.id,
         qty: 1,
         option: action.payload.option,
-        pc: action.payload.cost,
+        pc: action.payload.pc,
       });
     },
     deletecompoptdata(state, action) {

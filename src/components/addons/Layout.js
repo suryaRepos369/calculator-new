@@ -1,12 +1,32 @@
 import React from "react";
 import "./Layout.css";
+
+import { formAction } from "../store/index";
+import { useDispatch } from "react-redux";
+
 const Layout = () => {
+  const dispatch = useDispatch();
+  const res = React.useRef();
+  React.useEffect(() => {
+    res.current.focus();
+  }, [res]);
   function changeHandler() {}
+
+  function selectHandler(e) {
+    console.log(e.target.value);
+    dispatch(
+      formAction.putlayoutfontdata({
+        id: 1,
+        qty: 1,
+        option: e.target.value,
+      })
+    );
+  }
 
   return (
     <React.Fragment>
       <div className="layout-container">
-        <h3 className="layout-header">Layout and Look </h3>
+        <h5 className="layout-header">Layout and Look </h5>
         {/* <div className="layout-note">
           <span>
             *** Note: we provide additional js functionality 3500 rupees per
@@ -37,7 +57,12 @@ const Layout = () => {
           </div>
 
           <div className="layout-price-box-container">
-            <select name="fonts" className="font">
+            <select
+              name="fonts"
+              ref={res}
+              className="font"
+              onChange={selectHandler}
+            >
               <option>@font-face</option>
               <option>Typekit</option>
               <option>Google fonts</option>

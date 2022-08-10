@@ -9,7 +9,7 @@
 }
 
 .frame-header {
-    padding: 1em;
+    padding: 5px;
     margin: 1px;
     border-radius: 10px;
     background-color: rgb(115, 148, 238);
@@ -57,13 +57,13 @@
 
     margin-right: 1em;
 
-    background-color: rgb(155, 149, 149);
+    background-color:white;
     border-radius: 5px;
     /* flex gap-2 */
 }
 
 .frame-price-box-container p {
-    margin: 1em;
+    margin: 5px;
 }
 
 .frame-note {

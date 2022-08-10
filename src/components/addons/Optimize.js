@@ -18,24 +18,27 @@ const AdditionalJsFunctionality = () => {
       console.log(data, "data");
 
       dispatch(
-        formAction.putaddjsdata({
+        formAction.putoptimizedata({
           id: data[0].id,
           option: data[0].option,
-          cost: data[0].cost,
+          pc: data[0].pc,
         })
       );
     } else {
       let data = optoptions.filter((data) => data.id == e.target.value);
       dispatch(
-        formAction.deleteaddjsdata({ id: data[0].id, cost: data[0].cost })
+        formAction.deleteoptimizedata({ id: data[0].id, cost: data[0].cost })
       );
     }
   };
-
+  const opt = React.useRef();
+  React.useEffect(() => {
+    opt.current.focus();
+  }, []);
   return (
     <React.Fragment>
       <div className="addres-container">
-        <h3 className="addres-header">Optimization </h3>
+        <h5 className="addres-header">Optimization </h5>
         {/* <div className="addres-note">
           <span>
             *** Note: we provide additional js functionality 3500 rupees per
@@ -53,6 +56,7 @@ const AdditionalJsFunctionality = () => {
               <div className="addres-price-box-container">
                 <input
                   type="checkbox"
+                  ref={opt}
                   value={data.id}
                   onChange={changeHandler}
                 ></input>

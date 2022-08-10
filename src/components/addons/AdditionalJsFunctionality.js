@@ -52,11 +52,14 @@ const AdditionalJsFunctionality = () => {
       );
     }
   };
-
+  React.useEffect(() => {
+    js.current.focus();
+  }, []);
+  const js = React.useRef();
   return (
     <React.Fragment>
       <div className="addjs-container">
-        <h3 className="addjs-header">Additional JS Functionality </h3>
+        <h5 className="addjs-header">Additional JS Functionality </h5>
         <div className="addjs-note">
           <span>
             *** Note: we provide additional js functionality 3500 rupees per
@@ -75,9 +78,10 @@ const AdditionalJsFunctionality = () => {
                 <input
                   type="checkbox"
                   value={data.id}
+                  ref={js}
                   onChange={changeHandler}
                 ></input>
-                <p>{data.cost} / Hr </p>
+                <p>{data.cost + "/Hr"} </p>
               </div>
             </div>
           );

@@ -6,7 +6,7 @@
 }
 
 .addjs-header {
-    padding: 1em;
+    padding: 5px;
     margin: 1px;
     border-radius: 10px;
     background-color: rgb(115, 148, 238);
@@ -42,7 +42,7 @@
     /* w-full flex-grow-0 mt-3 border-t border-blue-900 justify-center h-1 */
     display: flex;
     flex-grow: 0;
-    margin-top: 1rem;
+    margin-top: 10px;
     border: 1px solid black;
     justify-content: center;
 
@@ -53,20 +53,20 @@
 
     margin-right: 1em;
 
-    background-color: rgb(155, 149, 149);
+    background-color: white;
     border-radius: 5px;
     /* flex gap-2 */
 }
 
 .addjs-price-box-container p {
-    margin: 1em;
+    margin: 5px;
 }
 
 .addjs-note {
     background-color: white;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 5px;
     color: red;
-    font-size: larger;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: small;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

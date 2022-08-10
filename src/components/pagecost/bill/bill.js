@@ -1,89 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
+import { formAction } from "../../store";
 import * as React from "react";
 import "./bill.css";
 
 import axios from "axios";
-const billdata = {
-  totalcost: 3534,
-  pagesize: [
-    {
-      option: "S",
-      price: 2342,
-      eta: 3,
-      qty: 1,
-    },
-    {
-      option: "M",
-      price: 5000,
-      eta: 3,
-      qty: 3,
-    },
-    {
-      option: "L",
-      price: 5000,
-      eta: 3,
-      qty: 3,
-    },
-  ],
-  optimize: [
-    {
-      option: "Section 508 / WCAG",
-      pc: 15,
-    },
-  ],
-  responseive: {
-    option: "I have One Resolution",
-    pc: 10,
-  },
-  framework: {
-    option: "Bootstrap",
-    pc: 10,
-  },
-  layout: [
-    {
-      option: "Retina",
-      pc: 0,
-    },
-    {
-      option: "Google fonts",
-      pc: 0,
-    },
-  ],
-  additional_css_option: [
-    {
-      option: "advanced css3 animation",
-      costPerHr: 45,
-    },
-  ],
-  advanced_js_option: [
-    {
-      option: "React ",
-      costPerHr: 45,
-    },
-  ],
-  interactivity_option: [
-    {
-      option: "Standard interactivity_option",
-      cost: 43,
-      pc: 12,
-      qty: 1,
-    },
-  ],
-  compatibility_option: [
-    {
-      option: "Another/older browser",
-      pc: 12,
-      qty: 1,
-    },
-  ],
-  projectbrief: "This is the sample project for the React team ",
-  attachment: "ugjkhgkjh",
-  contact: {
-    name: "anitha",
-    email: "@tealorca.in",
-    mobile: "2342398128",
-  },
-};
+
 var url = "http://192.168.0.168/Quotation-app/public/api/postapi";
 
 async function postData(url = "", data = {}) {
@@ -103,41 +24,94 @@ async function postData(url = "", data = {}) {
   return response.json(); // parses JSON response into native JavaScript objects
 }
 
-function paybuttonHandler() {
-  postData(url, billdata).then((data) => {
-    console.log("Submited data", data); // JSON data parsed by `data.json()` call
-  });
-}
-
 export default function SpanningTable() {
+  const dispatch = useDispatch();
+
+  const contact = useSelector((state) => state.dataSlice.contact);
+  // console.log("contact data", contact);
+
+  const responsebill = useSelector((state) => state.dataSlice.response);
+
+  const optimizebill = useSelector((state) => state.dataSlice.optimize);
+  const layout = useSelector((state) => state.dataSlice.layout);
+  const layoutfont = useSelector((state) => state.dataSlice.layoutfont);
+
+  const framebill = useSelector((state) => state.dataSlice.framework);
   const advcssbill = useSelector((state) => state.dataSlice.advcss);
-  console.log("advcssbill:", advcssbill);
   const intoptbill = useSelector((state) => state.dataSlice.intopt);
+  var t = useSelector((state) => state.dataSlice.TotalCost);
 
-  const total = useSelector((state) => state.dataSlice.TotalCost);
-
+  var total = parseFloat(t).toFixed(1);
   const addjsbill = useSelector((state) => state.dataSlice.addjs);
   const compbill = useSelector((state) => state.dataSlice.compopt);
   const pagesizebill = useSelector((state) => state.dataSlice.pagesize);
-  console.log("pagesizebill:", pagesizebill);
-
   const selectedPage = pagesizebill.filter((data) => data.qty > 0);
-  console.log("selectedPage:", selectedPage);
 
-  const TAX_RATE = 0.07;
+  const contactflag = useSelector((state) => state.dataSlice.contactFlag);
 
-  function ccyFormat(num) {
-    return `${num.toFixed(2)}`;
+  function paybuttonHandler() {
+    if (total < 1) {
+      alert("Please select any basic package to checkout");
+    }
+    if (total > 1 && !contact.length) {
+      alert("please enter the contact details");
+      dispatch(formAction.setcontactFlag(true));
+    }
+    if (total > 1 && contact.length) {
+      alert("form submited");
+    }
   }
 
   var item, cost, qty, pc;
   var page = [];
-  selectedPage.map((data) => {
+  selectedPage.forEach((data) => {
     item = data.type;
     cost = data.price;
     qty = data.qty;
+    if (data.qty > 0) page.push({ desc: item, cost: cost, qty: qty, pc: 0 });
+  });
+  //!responsive data.....
+  var resrows = [];
+  var resflag = false;
 
-    page.push({ desc: item, cost: cost, qty: qty, pc: 0 });
+  if (responsebill.length > 0) {
+    resflag = true;
+    responsebill.forEach((data) => {
+      item = data.option;
+      cost = data.cost;
+      qty = data.qty;
+      pc = data.pc;
+      resrows.push({ desc: item, cost: cost, qty: qty, pc });
+    });
+  }
+
+  //!optimize data.....
+  var optimizerows = [];
+  var optimizeflag = false;
+
+  if (optimizebill.length > 0) {
+    resflag = true;
+    optimizebill.forEach((data) => {
+      item = data.option;
+      cost = data.cost;
+      qty = data.qty;
+      pc = 23432;
+      optimizerows.push({ desc: item, cost: cost, qty: qty, pc });
+    });
+  }
+  //!framework data.....
+  var framerows = [];
+  // // var optimizeflag = false;
+  // console.log("frame bill ", framebill);
+
+  var framerows = [];
+  framebill.forEach((data) => {
+    resflag = true;
+    framerows.push({
+      desc: data.option,
+      pc: data.pc,
+      qty: data.qty,
+    });
   });
 
   var intoptrows = [];
@@ -145,12 +119,12 @@ export default function SpanningTable() {
 
   if (intoptbill.length > 0) {
     intoptflag = true;
-    intoptbill.map((data) => {
+    intoptbill.forEach((data) => {
       item = data.option;
       cost = data.cost;
       qty = data.qty;
       pc = data.pc;
-      intoptrows.push({ desc: item, cost: cost, qty: qty, pc });
+      intoptrows.push({ desc: item, qty, pc });
     });
   }
 
@@ -159,7 +133,7 @@ export default function SpanningTable() {
   if (addjsbill.length > 0) {
     addjsflag = true;
 
-    addjsbill.map((data) => {
+    addjsbill.forEach((data) => {
       item = data.option;
       cost = data.cost;
       qty = data.qty;
@@ -172,7 +146,7 @@ export default function SpanningTable() {
   var advcssrow = [];
   if (advcssbill.length > 0) {
     advcssflag = true;
-    advcssbill.map((data) => {
+    advcssbill.forEach((data) => {
       item = data.option;
       qty = data.qty;
       pc = data.pc;
@@ -183,7 +157,7 @@ export default function SpanningTable() {
   var comprow = [];
   if (compbill.length > 0) {
     compflag = true;
-    compbill.map((data) => {
+    compbill.forEach((data) => {
       item = data.option;
       cost = data.cost;
       qty = data.qty;
@@ -192,14 +166,43 @@ export default function SpanningTable() {
     });
   }
 
-  let paylater = [addjsflag, advcssflag, compflag, intoptflag].some(
-    (data) => data === true
-  );
-  if (paylater) {
-    console.log("additional pay later");
-  } else {
-    console.log("deselected");
-  }
+  let paylater = [
+    addjsflag,
+    resflag,
+    optimizeflag,
+    advcssflag,
+    compflag,
+    intoptflag,
+  ].some((data) => data === true);
+
+  const billdata = {
+    totalcost: total,
+    pagesize: page,
+    optimize: optimizerows,
+    responseive: resrows,
+    layout: [layout, layoutfont],
+    additional_css_option: advcssrow,
+    advanced_js_option: rows,
+    interactivity_option: [
+      {
+        option: "Standard interactivity_option",
+        cost: 43,
+        pc: 12,
+        qty: 1,
+      },
+    ],
+    compatibility_option: [
+      {
+        option: "Another/older browser",
+        pc: 12,
+        qty: 1,
+      },
+    ],
+    projectbrief: contact.brief,
+    attachment: "ugjkhgkjh",
+    contact: [contact.name, contact.email, contact.mobile],
+  };
+  // console.log("billdata", billdata);
 
   return (
     <React.Fragment>
@@ -208,17 +211,10 @@ export default function SpanningTable() {
 
         <table className="table-container">
           <thead>
-            <tr
-              style={{
-                border: "1px solid black ",
-                padding: "2rem",
-                backgroundColor: "skyblue",
-                margin: "2rem",
-              }}
-            >
-              <th>Description </th>
-              <th>Quantity</th>
-              <th>Cost/unit</th>
+            <tr>
+              <th>Desc </th>
+              <th>Qty</th>
+              <th>unit</th>
               <th> %</th>
               <th>Cost</th>
             </tr>
@@ -236,50 +232,103 @@ export default function SpanningTable() {
                 </tr>
               );
             })}
+            {paylater && (
+              <tr className="Addition options to be billed later">
+                <td
+                  style={{ textAlign: "center", backgroundColor: "grey" }}
+                  colSpan={5}
+                >
+                  Addition options to be billed later
+                </td>
+              </tr>
+            )}
+
+            {framerows.map((data, id) => {
+              if (data.pc != 0) {
+                return (
+                  <tr key={id} className="additional-js-content">
+                    <td>{data.desc} </td>
+                    <td>{data.qty} </td>
+
+                    <td>{"-"} </td>
+                    <td>{data.pc} %</td>
+                    <td>{(data.pc / 100) * total} </td>
+                  </tr>
+                );
+              }
+            })}
+            {resrows.map((data, id) => {
+              if (data.pc > 0) {
+                return (
+                  <tr key={id} className="additional-js-content">
+                    <td>{data.desc} </td>
+                    <td>{data.qty} </td>
+
+                    <td>{"-"} </td>
+                    <td>{data.pc} %</td>
+                    <td>{(data.pc / 100) * total} </td>
+                  </tr>
+                );
+              }
+            })}
+
             {addjsflag && (
               <tr className="additional-js-heading">
-                <td style={{ textAlign: "center" }} colSpan={4}>
+                <td style={{ textAlign: "center" }} colSpan={5}>
                   Additional JS Functionality
                 </td>
               </tr>
             )}
-            {rows.map((data) => {
+            {rows.map((data, id) => {
               return (
-                <tr className="additional-js-content">
+                <tr key={id} className="additional-js-content">
                   <td>{data.desc} </td>
                   <td>{data.qty} </td>
-                  <td>{data.pc} </td>
+                  <td>{data.pc + "/Hr"} </td>
+                  <td>{"-"} </td>
+                  <td>{"-"} </td>
+                </tr>
+              );
+            })}
+
+            {optimizerows.map((data, id) => {
+              return (
+                <tr key={id} className="additional-js-content">
+                  <td>{data.desc} </td>
+                  <td>{data.qty} </td>
+                  <td>{678678 + "%"} </td>
                   <td>{data.cost} </td>
                 </tr>
               );
             })}
             {intoptflag && (
               <tr className="interactivity-heading">
-                <td style={{ textAlign: "center" }} colSpan={4}>
+                <td style={{ textAlign: "center" }} colSpan={5}>
                   Interactivity Options
                 </td>
               </tr>
             )}
-            {intoptrows.map((data) => {
+            {intoptrows.map((data, id) => {
               return (
-                <tr className="interactivity-content">
+                <tr key={id} className="interactivity-content">
                   <td>{data.desc} </td>
                   <td>{data.qty} </td>
-                  <td>{data.pc} </td>
-                  <td>{data.cost} </td>
+                  <td>{"-"} </td>
+                  <td>{data.pc + "%"} </td>
+                  <td>{(data.pc / 100) * total}</td>
                 </tr>
               );
             })}
             {advcssflag && (
               <tr className="advancedcss-heading">
-                <td style={{ textAlign: "center" }} colSpan={4}>
+                <td style={{ textAlign: "center" }} colSpan={5}>
                   Addvanced CSS Options
                 </td>
               </tr>
             )}
-            {advcssrow.map((data) => {
+            {advcssrow.map((data, id) => {
               return (
-                <tr className="advancedcss-heading">
+                <tr key={id} className="advancedcss-heading">
                   <td>{data.desc} </td>
                   <td>{data.qty} </td>
                   <td>{data.pc + "/Hr"} </td>
@@ -290,20 +339,23 @@ export default function SpanningTable() {
             })}
             {compflag && (
               <tr className="comp-heading">
-                <td style={{ textAlign: "center" }} colSpan={4}>
+                <td style={{ textAlign: "center" }} colSpan={5}>
                   Compatibility options
                 </td>
               </tr>
             )}
-            {comprow.map((data) => {
-              return (
-                <tr className="comp-content">
-                  <td>{data.desc} </td>
-                  <td>{data.qty} </td>
-                  <td>{data.pc} </td>
-                  <td>{data.cost} </td>
-                </tr>
-              );
+            {comprow.map((data, id) => {
+              if (data.pc > 0) {
+                return (
+                  <tr key={id} className="comp-content">
+                    <td>{data.desc} </td>
+                    <td>{data.qty} </td>
+                    <td>{"-"} </td>
+                    <td>{data.pc + "%"} </td>
+                    <td>{(data.pc / 100) * total} </td>
+                  </tr>
+                );
+              }
             })}
 
             <tr className="total-heading ">
@@ -314,7 +366,7 @@ export default function SpanningTable() {
               <td
                 style={{
                   textAlign: "center",
-                  padding: "10px",
+                  padding: "3px",
                 }}
                 colSpan={5}
               >
